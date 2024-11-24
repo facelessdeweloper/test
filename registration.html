@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дневник программиста</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #252c33;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .password-display {
+            margin-bottom: -500px;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <img src="../static/img/logo.svg" alt="logo" width="30" height="30">
+        <ul class="main-list">
+        </ul>
+    </header>
+    <main class="main-login">
+        {% block content %}
+        <a href="{{ url_for('login') }}" class="back-button">Вернуться на главную страницу</a>
+        <form action="{{ url_for('reg') }}" method="post" class="login">
+            <label for="email">
+                <input class="form__input" type="email" name="email" id="email" placeholder="Введите e-mail" required>
+            </label>
+            <label for="password">
+                <input class="form__input" type="password" name="password" id="password" placeholder="Введите пароль" required>
+            </label>
+            <button class="form__button">Создать аккаунт</button>
+        </form>
+        <!-- Выводим сгенерированный пароль снизу -->
+        {% if password_gen %}
+        <div class="password-display">
+            <h2>Случайный пароль: {{password_gen}}</h2>
+        </div>
+        {% endif %}
+        {% endblock %}
+    </main>
+</body>
+</html>
